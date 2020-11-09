@@ -1,0 +1,29 @@
+type Section {
+  professor: Professor!
+  students: Int!
+  class: Class!
+  rating: Int!
+  comments: [String]
+}
+
+type Class {
+  identifier: String!
+  courseNum: Int!
+  fullIdentifier: String!
+  sections: [Section] @relation(name: "section_relation")
+  professors: [Professor] @relation(name: "class_relation")
+}
+
+type Professor {
+  first: String!
+  last: String!
+  sections: [Section] @relation(name: "section_relation")
+  classes: [Class!] @relation(name: "class_relation")
+}
+
+type Query {
+  allProfessors: [Professor!]
+  allSections: [Section!]
+  allClasses: [Class!]
+  classesByNum(courseNum: Int!): [Class!]
+}
