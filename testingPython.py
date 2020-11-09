@@ -4,10 +4,11 @@ from faunadb.client import FaunaClient
 import pprint
 
 f = open(".faunarc", "r")
-key = f.readline()[10:]
+testDatabaseKey = f.readline()[10:]
 f.close()
+print(testDatabaseKey)
 
-client = FaunaClient(key)
+client = FaunaClient(testDatabaseKey)
 
 indexes = client.query(q.paginate(q.indexes()))
 
