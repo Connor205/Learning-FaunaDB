@@ -1,15 +1,15 @@
 type Section {
-  professor: Professor!
+  professor: Professor
   students: Int!
-  class: Class!
-  rating: Int!
+  class: Class
+  rating: Float!
   comments: [String]
 }
 
 type Class {
   identifier: String!
   courseNum: Int!
-  fullIdentifier: String!
+  fullIdentifier: String! @unique
   sections: [Section] @relation(name: "section_relation")
   professors: [Professor] @relation(name: "class_relation")
 }
@@ -26,4 +26,5 @@ type Query {
   allSections: [Section!]
   allClasses: [Class!]
   classesByNum(courseNum: Int!): [Class!]
+  classesByFullIdentifier(fullIdentifier: String!): Class
 }
