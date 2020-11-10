@@ -2,11 +2,9 @@ import requests
 import pprint
 import os
 
-files = [f for f in os.listdir('.') if os.path.isfile(f)]
-for f in files:
-    print(f)
 f = open("key.txt", "r")
 key = f.read()
+f.close()
 
 headers = {"authorization": key}
 
@@ -58,9 +56,25 @@ query {
     findClassByID(id:281751816260026882) {
             courseNum
             identifier
+            _id
     }
 }
 """
 
-result = run_query(getClassByID)['data']  # Execute the query
-pprint.pprint(result)
+findSectionByID = """
+query {
+  findSectionByID(id: 281830531615687170){
+    professor {
+      first
+      last
+    }
+    rating
+    class {
+      fullIdentifier
+    }
+  }
+}
+"""
+# Execute the query
+pprint.pprint(run_query(findSectionByID)['data'])
+pprint.pprint(run_query(getClassByID)['data'])
