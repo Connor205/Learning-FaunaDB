@@ -10,6 +10,7 @@ type Class {
   identifier: String!
   courseNum: Int!
   fullIdentifier: String! @unique
+  description: String
   sections: [Section] @relation(name: "section_relation")
   professors: [Professor] @relation(name: "class_relation")
 }
