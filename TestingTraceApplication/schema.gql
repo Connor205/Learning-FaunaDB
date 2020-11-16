@@ -21,6 +21,8 @@ type Class {
 type Professor {
   first: String!
   last: String!
+  full_name: String!
+  bio: String
   sections: [Section] @relation(name: "section_relation")
   classes: [Class!] @relation(name: "class_relation")
 }
