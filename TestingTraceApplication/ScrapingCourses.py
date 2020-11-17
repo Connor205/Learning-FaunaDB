@@ -11,6 +11,7 @@ main_page = requests.get(baseLink + "course-descriptions/")
 main_page_soup = BeautifulSoup(main_page.content, 'html.parser')
 linkAttributes = main_page_soup.find_all('a')
 
+<<<<<<< HEAD
 pageLinks = []
 departments = []
 for link in linkAttributes:
@@ -60,3 +61,9 @@ with open("classes_no_desc.txt", "w+") as ouputfile:
 # link1 = driver.find_element_by_xpath("//*[@id='atozindex']/ul[1]/li[2]/a")
 # link1 = link1.get_attribute("href")
 # print(link1)
+=======
+driver.get("http://catalog.northeastern.edu/course-descriptions/")
+link1 = driver.find_element_by_xpath("//*[@id='atozindex']/ul[1]/li[2]/a")
+link1 = link1.get_attribute("href")
+print(link1)
+>>>>>>> 1169343e392735fc7f16ed014806895339a83138

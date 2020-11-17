@@ -1,6 +1,7 @@
 import requests
 import pprint
 import os
+import time
 
 f = open("key.txt", "r")
 key = f.read()
@@ -40,17 +41,15 @@ query {
 """
 
 getClassByNum = """
-query {
-  classesByNum(courseNum: 2500) {
+ query {
+  classesByNum(course_num: 2500){
     data {
-      identifier
-      courseNum
-      _id
+      full_identifier
+      department
     }
   }
 }
 """
-
 getClassByID = """
 query {
     findClassByID(id:281751816260026882) {
@@ -75,6 +74,33 @@ query {
   }
 }
 """
+
+findClassByUnique = """
+query {
+  classesByFullIdentifier(full_identifier: "CS2500"){
+    department
+    full_identifier
+  }
+}
+"""
+
+findProfsForClass = """
+query getProfessors{
+  classesByFullIdentifier(full_identifier: "TEST9999"){
+    department
+    name
+    professors{
+      data {
+        first
+        last
+      }
+    }
+  }
+  
+}"""
+start = time.time()
 # Execute the query
-pprint.pprint(run_query(findSectionByID)['data'])
-pprint.pprint(run_query(getClassByID)['data'])
+# run_query(findProfsForClass)
+pprint.pprint(run_query(findProfsForClass)['data'])
+end = time.time()
+print(f"Runtime of the query is {end - start}")
